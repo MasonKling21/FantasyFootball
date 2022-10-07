@@ -1,10 +1,11 @@
-Utilizes MySQL, React.js, Node.js
+A simple fantasy football companion app.
 
-A few upcoming features:
+Everyone who has played fantasy football or other fantasy sports has drafted the biggest bust of all time, or has missed out on a great player. This web app hopes to minimize these picks and allows users to keep track of the rookies who have potential, underrated players, or the stars who are overrated. 
 
-Team Logo next to player name instead of picture of player
-Team power ranking for 2022 season displayed
-Ways to sort players
-Unsure what stats to store... previous season fantasy points? # catches? Others?????
-Player watchlist which can be sorted the same way the list of all players is
-Good design
+A few features include:
+  A customizable do not draft list
+  A customizable high priority draft list
+  User registration and login functionality
+  Ability to sort players by stats, name, team, etc
+  
+This is just a personal project to hopefully improve my fantasy football drafts in the future.
