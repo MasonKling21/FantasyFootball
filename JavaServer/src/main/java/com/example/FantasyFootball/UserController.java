@@ -24,4 +24,22 @@ public class UserController {
         System.out.println();
         return;
     }
+
+
+    @GetMapping("/api/login")
+    public void login(@RequestParam("username") String username, @RequestParam("password") String password) {
+        // fetch customer and verify password
+        User userLogin = new User(" "," "," ");
+        userLogin = repo.findByUsername(username);
+
+        System.out.println(userLogin.getPassword() + " = " + password);
+
+        if(userLogin.getPassword().equals(password)) {
+            System.out.println("Login Succesful!");
+        }
+        else {
+            System.out.println("Incorrect Password!");
+        }
+        return;
+    }
 }

@@ -6,7 +6,7 @@ const Header = () => {
     <HeaderContainer>
 
         <p className='pageTitle'>A Fantasy Football Website</p>
-        <p className='right'><a href="/players">Players</a> | <a href="/register">Register</a> | <a href="/">Login</a></p>
+        <p className='right'><a href="/players">Players</a> | <a href="/register">Register</a> | <a href="/login">Login</a></p>
     
     </HeaderContainer>
   )

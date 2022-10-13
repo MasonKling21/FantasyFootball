@@ -1,6 +1,6 @@
 [
 	{"name":"Josh Allen", "points":"460.00", "team":"Buffalo Bills", "position":"QB", "status":"ACT"},
-	{"name":"Tom Brady", "points":"454.00", "team":"New England Patriots", "position":"QB", "status":"ACT"},
+	{"name":"Tom Brady", "points":"454.00", "team":"Tampa Bay Buccaneers", "position":"QB", "status":"ACT"},
 	{"name":"Justin Herbert", "points":"442.00", "team":"Los Angeles Chargers", "position":"QB", "status":"ACT"},
 	{"name":"Patrick Mahomes", "points":"428.00", "team":"Kansas City Chiefs", "position":"QB", "status":"ACT"},
 	{"name":"Matthew Stafford", "points":"405.00", "team":"Los Angeles Rams", "position":"QB", "status":"ACT"},
