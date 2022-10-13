@@ -16,8 +16,8 @@ const HeaderContainer = styled.div`
 display: grid;
 grid-template-columns: 1fr 1fr;
 margin-top: 0;
-padding: 10px;
-padding-top: 0; 
+padding: 2%;
+padding-top: 0;
 .pageTitle {
   font-weight: bold;
 }
