@@ -52,8 +52,7 @@ public class UserController {
     @GetMapping("/api/login")
     public void login(@RequestParam("username") String username, @RequestParam("password") String password) throws NoSuchAlgorithmException, InvalidKeySpecException, UnsupportedEncodingException {
         // fetch customer and verify password
-        User userLogin = new User(" "," "," "," ");
-        userLogin = repo.findByUsername(username);
+        User userLogin = repo.findByUsername(username);
 
         byte[] salt = Base64.getDecoder().decode(new String(userLogin.getSalt()).getBytes("UTF-8"));
 
@@ -68,6 +67,30 @@ public class UserController {
         }
         else {
             System.out.println("Incorrect Password!");
+        }
+        return;
+    }
+
+
+    @GetMapping("/api/delete")
+    public void delete(@RequestParam("username") String username, @RequestParam("password") String password) throws NoSuchAlgorithmException, InvalidKeySpecException, UnsupportedEncodingException {
+        // fetch customer and verify password
+        User userLogin = repo.findByUsername(username);
+
+        byte[] salt = Base64.getDecoder().decode(new String(userLogin.getSalt()).getBytes("UTF-8"));
+
+        PBEKeySpec pbeKeySpec = new PBEKeySpec(password.toCharArray(), salt, 10, 512);
+        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
+        byte[] hash = skf.generateSecret(pbeKeySpec).getEncoded();
+
+        String base64Hash = Base64.getMimeEncoder().encodeToString(hash);
+
+        if(base64Hash.equals(userLogin.getPassword())) {
+            repo.deleteByUsername(userLogin.getUsername());
+            System.out.println("Account deleted!");
+        }
+        else {
+            System.out.println("Error deleting account!");
         }
         return;
     }
