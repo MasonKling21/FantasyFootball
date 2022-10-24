@@ -1,9 +1,16 @@
 import React from 'react'
-import jsonData from './data.json'
 import styled from 'styled-components';
 import Header from './Header';
 
 function Players() {
+
+  // No clue how to get this data?#@!?#@!?#@!?$?#@?3!?%#@
+  // JavaScript is pretty garbage
+  var data = fetch("http://localhost:8080/api/data.json")
+  .then(response => response.text())
+  .then(data => {
+    return data;
+  });
 
   const getIMG = ({player}) => {
 
@@ -12,7 +19,7 @@ function Players() {
     )
   }
 
-  const displayData = jsonData.map((player) => {
+  const displayData = data.map((player) => {
 
     if(player.team === "N/A") {
       return("");
