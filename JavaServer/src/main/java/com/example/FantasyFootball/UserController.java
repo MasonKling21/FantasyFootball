@@ -19,15 +19,8 @@ public class UserController {
     private UserRepo repo;
 
     @GetMapping("/api/user")
-    public User register(
-        @RequestParam("username") String username,
-        @RequestParam("email") String email,
-        @RequestParam("password") String password,
-        @RequestParam("confirmPassword") String confirmPassword)
-        throws 
-        NoSuchAlgorithmException,
-        InvalidKeySpecException,
-        UnsupportedEncodingException {
+    public User register(@RequestParam("username") String username, @RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword) 
+    throws NoSuchAlgorithmException, InvalidKeySpecException, UnsupportedEncodingException {
 
         if(!password.equals(confirmPassword)) {
             System.out.println("Passwords don't match");
@@ -42,21 +35,13 @@ public class UserController {
 
         repo.save(new User(username, email, base64Hash, base64Salt));
 
-        // fetch all customers
-        /*
-        System.out.println("Users found with findAll():");
-        System.out.println("-------------------------------");
-        for (User user : repo.findAll()) {
-        System.out.println(user);
-        }
-        System.out.println();
-        */
         return repo.findByUsername(username);
     }
 
 
     @GetMapping("/api/login")
-    public User login(@RequestParam("username") String username, @RequestParam("password") String password) throws NoSuchAlgorithmException, InvalidKeySpecException, UnsupportedEncodingException {
+    public User login(@RequestParam("username") String username, @RequestParam("password") String password) 
+    throws NoSuchAlgorithmException, InvalidKeySpecException, UnsupportedEncodingException {
         // fetch customer and verify password
         User userLogin = repo.findByUsername(username);
 
@@ -76,7 +61,8 @@ public class UserController {
 
 
     @GetMapping("/api/delete")
-    public void delete(@RequestParam("username") String username, @RequestParam("password") String password) throws NoSuchAlgorithmException, InvalidKeySpecException, UnsupportedEncodingException {
+    public void delete(@RequestParam("username") String username, @RequestParam("password") String password) 
+    throws NoSuchAlgorithmException, InvalidKeySpecException, UnsupportedEncodingException {
         // fetch customer and verify password
         User userLogin = repo.findByUsername(username);
 
@@ -94,7 +80,8 @@ public class UserController {
         return;
     }
 
-    public String getHash(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException, UnsupportedEncodingException {
+    public String getHash(String password, byte[] salt)
+    throws NoSuchAlgorithmException, InvalidKeySpecException, UnsupportedEncodingException {
         PBEKeySpec pbeKeySpec = new PBEKeySpec(password.toCharArray(), salt, 10, 512);
         SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
         byte[] hash = skf.generateSecret(pbeKeySpec).getEncoded();
@@ -104,3 +91,13 @@ public class UserController {
         return base64Hash;
     }
 }
+
+        // fetch all users
+        /*
+        System.out.println("Users found with findAll():");
+        System.out.println("-------------------------------");
+        for (User user : repo.findAll()) {
+        System.out.println(user);
+        }
+        System.out.println();
+        */
