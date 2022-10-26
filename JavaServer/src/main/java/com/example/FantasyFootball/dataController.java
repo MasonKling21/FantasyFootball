@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.FileReader;
 import java.net.URL;
+import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
-import org.json.simple.parser.*;
+import java.io.InputStream;
+
+import com.google.gson.Gson; 
+import com.google.gson.GsonBuilder;  
 
 
 @RestController
@@ -19,18 +21,18 @@ public class dataController {
     
     @RequestMapping(value = "/api/data.json", method = RequestMethod.GET)
     @CrossOrigin
-    public JSONArray sendData() throws ParseException, IOException {
-        JSONParser parser = new JSONParser();
-
+    public String sendData() throws IOException {
         // Get current working directory so we can grab data.json
         URL path = dataController.class.getResource("data.json");
 
         // Get file and convert it to JSONObject
         File file = new File(path.getFile());
-        Object obj = parser.parse(new FileReader(file));
-        JSONObject data = (JSONObject)obj;
 
-        return (JSONArray) data.get("players");
+        Scanner scan = new Scanner(file);
+        scan.useDelimiter("\\Z");
+        String content = scan.next();
+        
+        return content;
     }
 
 }

@@ -1,9 +1,11 @@
 import React from 'react'
 import styled from 'styled-components';
 import Header from './Header';
-import jsonData from './data.json';
 
-var displayData;
+async function sortBy(e) {
+
+  return;
+}
 
 class Players extends React.Component {
   state = {
@@ -14,6 +16,11 @@ class Players extends React.Component {
   async componentDidMount() {
     const response = await fetch("http://localhost:8080/api/data.json");
     const data = await response.json();
+
+    async function sortBy(e) {
+  
+      return;
+    }
 
     console.log(data[0]);
 
@@ -38,7 +45,7 @@ class Players extends React.Component {
             <thead>
               <tr>
                 {this.state.head.map(heading => {
-                  return <th key={heading}>{heading}</th>
+                  return <th key={heading} onClick={sortBy}>{heading}</th>
                 })}
               </tr>
             </thead>
@@ -47,7 +54,7 @@ class Players extends React.Component {
               {this.state.data.map((row,index) => {
                 return <tr key={index}>
                   {this.state.head.map((key,index) => {
-                    return <td key={row[key]}>{row[key]}</td>
+                    return <td key={index[key]}>{row[key]}</td>
                   })}
                 </tr>
               })}
