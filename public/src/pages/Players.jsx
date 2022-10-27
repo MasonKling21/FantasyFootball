@@ -60,6 +60,9 @@ class Players extends React.Component {
               {this.state.data.map((row,index) => {
                 return <tr key={index}>
                   {this.state.head.map((key,index) => {
+                    if(row["team"] === "N/A") {
+                      return;
+                    }
                     if(key === "team") {
                       return <td key={index[key]}>{getIMG(row[key])}</td>
                     }
