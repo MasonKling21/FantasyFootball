@@ -2,9 +2,28 @@ import React from 'react'
 import styled from 'styled-components';
 import Header from './Header';
 
-async function sortBy(e) {
+function sortBy(data, header) {
+  return data.sort((a,b) => {
+    if(header === "name" || header === "team" || header === "poisition") {
+      if(a[header] < b[header]) {
+        return -1;
+      }
+      return 1;
+    }
+    else {
+      return b[header] - a[header];
+    }
+  })
+}
 
-  return;
+function getIMG(team) {
+  if(team === "N/A") {
+    return("N/A");
+  }
+
+  return (
+    <img src={require(`./logos/${team}.gif`)} alt={team}/>
+  )
 }
 
 class Players extends React.Component {
@@ -17,21 +36,8 @@ class Players extends React.Component {
     const response = await fetch("http://localhost:8080/api/data.json");
     const data = await response.json();
 
-    async function sortBy(e) {
-  
-      return;
-    }
-
-    console.log(data[0]);
-
     this.setState({data: data, head: Object.keys(data[0])});
 
-    const getIMG = ({player}) => {
-
-      return (
-        <img src={require(`./logos/${player.team}.gif`)} alt={player.team}/>
-      )
-    }
   }
 
   render() {
@@ -45,7 +51,7 @@ class Players extends React.Component {
             <thead>
               <tr>
                 {this.state.head.map(heading => {
-                  return <th key={heading} onClick={sortBy}>{heading}</th>
+                  return <th key={heading} onClick={() => this.setState({data: sortBy(this.state.data, heading), head: this.state.head})}>{heading}</th>
                 })}
               </tr>
             </thead>
@@ -54,6 +60,9 @@ class Players extends React.Component {
               {this.state.data.map((row,index) => {
                 return <tr key={index}>
                   {this.state.head.map((key,index) => {
+                    if(key === "team") {
+                      return <td key={index[key]}>{getIMG(row[key])}</td>
+                    }
                     return <td key={index[key]}>{row[key]}</td>
                   })}
                 </tr>
