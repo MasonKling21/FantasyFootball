@@ -4,7 +4,7 @@ import Header from './Header';
 
 function sortBy(data, header) {
   return data.sort((a,b) => {
-    if(header === "name" || header === "team" || header === "poisition") {
+    if(header === "name" || header === "team" || header === "position") {
       if(a[header] < b[header]) {
         return -1;
       }

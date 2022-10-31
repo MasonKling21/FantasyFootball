@@ -23,7 +23,7 @@ public class dataController {
     @CrossOrigin
     public String sendData() throws IOException {
         // Get current working directory so we can grab data.json
-        URL path = dataController.class.getResource("data.json");
+        URL path = dataController.class.getResource("data4.json");
 
         // Get file and convert it to JSONObject
         File file = new File(path.getFile());
