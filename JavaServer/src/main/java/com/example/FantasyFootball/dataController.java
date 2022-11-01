@@ -31,6 +31,8 @@ public class dataController {
         Scanner scan = new Scanner(file);
         scan.useDelimiter("\\Z");
         String content = scan.next();
+
+        scan.close();
         
         return content;
     }

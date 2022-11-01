@@ -37,7 +37,6 @@ class Players extends React.Component {
     const data = await response.json();
 
     this.setState({data: data, head: Object.keys(data[0])});
-
   }
 
   render() {
@@ -51,6 +50,7 @@ class Players extends React.Component {
             <thead>
               <tr>
                 {this.state.head.map(heading => {
+                  if(heading === "id") {return}
                   return <th key={heading} onClick={() => this.setState({data: sortBy(this.state.data, heading), head: this.state.head})}>{heading}</th>
                 })}
               </tr>
@@ -60,7 +60,7 @@ class Players extends React.Component {
               {this.state.data.map((row,index) => {
                 return <tr key={index}>
                   {this.state.head.map((key,index) => {
-                    if(row["team"] === "N/A") {
+                    if(row["team"] === "N/A" || key === "id") {
                       return;
                     }
                     if(key === "team") {
