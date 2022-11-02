@@ -5,15 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.FileReader;
 import java.net.URL;
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-
-import com.google.gson.Gson; 
-import com.google.gson.GsonBuilder;  
 
 
 @RestController
