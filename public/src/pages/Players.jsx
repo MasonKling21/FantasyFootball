@@ -2,6 +2,12 @@ import React from 'react'
 import styled from 'styled-components';
 import Header from './Header';
 
+async function dropdownMenu(e) {
+  return(
+    <p>HI</p>
+  )
+}
+
 function sortBy(data, header) {
   return data.sort((a,b) => {
     if(header === "name" || header === "team" || header === "position") {
@@ -36,6 +42,14 @@ class Players extends React.Component {
     const response = await fetch("http://localhost:8080/api/data.json");
     const data = await response.json();
 
+    for(let i = 0; i < data.length; i++) {
+      if(data[i].team === "N/A") {
+        data.splice(i, 1);
+        i--;
+      }
+    }
+    
+
     this.setState({data: data, head: Object.keys(data[0])});
   }
 
@@ -50,18 +64,17 @@ class Players extends React.Component {
             <thead>
               <tr>
                 {this.state.head.map(heading => {
-                  if(heading === "id") {return}
+                  if(heading === "id") {return ''}
                   return <th key={heading} onClick={() => this.setState({data: sortBy(this.state.data, heading), head: this.state.head})}>{heading}</th>
                 })}
               </tr>
             </thead>
-
-            <tbody>
+            <tbody onClick={dropdownMenu}>
               {this.state.data.map((row,index) => {
                 return <tr key={index}>
                   {this.state.head.map((key,index) => {
                     if(row["team"] === "N/A" || key === "id") {
-                      return;
+                      return '';
                     }
                     if(key === "team") {
                       return <td key={index[key]}>{getIMG(row[key])}</td>
